@@ -1,4 +1,4 @@
-# Laravel Broadcasting Example
+# Laravel Notifications and Broadcasting Example
 
 ## Running Servers
 
