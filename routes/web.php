@@ -38,8 +38,8 @@ Route::get('/ws' , function () {
 });
 
 Route::post('/chat-message' , function (\Illuminate\Http\Request $request) {
-    event(new \App\Events\ChatMessageEvent($request->message, auth()->user())); // passing , auth()->user() to get user name in Private Channel communication
+    event(new \App\Events\ChatMessageEvent($request->message)); // passing , auth()->user() to get user name in Private Channel communication
     return null;
- })->middleware(['auth', 'verified']); // attaching auth middlware in case of Private channel communication, otherwise non-logged in user can send msgs
+ });
 
 require __DIR__.'/auth.php';

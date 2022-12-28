@@ -23,10 +23,9 @@ class ChatMessageEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(string $message, User $user) // passing User $user for Private channel communication
+    public function __construct(string $message) // passing User $user for Private channel communication
     {
-       $this->message = $message;
-       $this->user = $user;
+       $this->message = $message;       
     }
 
     /**
@@ -36,9 +35,8 @@ class ChatMessageEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('presence.chat.1');
-        //return new PrivateChannel('private.chat.1');
-        //return new Channel('public.chat.1'); // this is Public channel, requires no authentication
+       
+        return new Channel('public.chat.1'); // this is Public channel, requires no authentication
         // above line commented to test Private channel working
     }
 
@@ -51,8 +49,7 @@ class ChatMessageEvent implements ShouldBroadcast
     {
         return [
             //'name' => 'Waqas Tariq - 34201-1828638-1'
-            'message' => $this->message,
-            'user' => $this->user->only(['name', 'email']) // sending name and email in case of Private channel communication
+            'message' => $this->message
         ];
     }
 }
