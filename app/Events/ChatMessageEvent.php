@@ -36,10 +36,7 @@ class ChatMessageEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('presence.chat.1');
-        //return new PrivateChannel('private.chat.1');
-        //return new Channel('public.chat.1'); // this is Public channel, requires no authentication
-        // above line commented to test Private channel working
+        return new PresenceChannel('presence.chat.1');       
     }
 
     public function broadcastAs() // for our own Event name, instead of full ClassName

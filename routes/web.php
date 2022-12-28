@@ -28,11 +28,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/playground' , function () {
-    event(new \App\Events\ChatMessageEvent("playground sample message"));
-    return null;
-});
-
 Route::get('/ws' , function () {
    return view('websocket');
 });
