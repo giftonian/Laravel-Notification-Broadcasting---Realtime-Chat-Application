@@ -41,7 +41,7 @@ class ChatMessageEvent implements ShouldBroadcast
 
     public function broadcastAs() // for our own Event name, instead of full ClassName
     {
-        return 'chat-message';
+        return 'chat-message'; // clients (js code) will listen at this
     }
 
     public function broadcastWith() // generating an event with a payload/data

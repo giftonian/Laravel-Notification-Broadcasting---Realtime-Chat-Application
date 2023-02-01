@@ -13,6 +13,7 @@ Alpine.start();
 const form = document.getElementById('form');
 const inputMessage = document.getElementById('input-message');
 const listMessgae = document.getElementById('list-messages');
+const spanTyping = document.getElementById('span-typing');
 
 
 
@@ -27,6 +28,12 @@ form.addEventListener('submit', function (event) {
 
 
 const channel = window.Echo.join('presence.chat.1'); // for Presence channel
+
+/*inputMessage.addEventListener('input', function (event) {    
+    channel.whisper('typing', {
+        email: user.email
+    })
+});*/
 
 
 channel.here((users) => { // for Presence channel
@@ -48,5 +55,9 @@ channel.here((users) => { // for Presence channel
         li.textContent = event.user.name + ': ' + message;
         listMessgae.append(li);
     }) // . is necessary in case you are using Custom event name
+
+    /*.listenForWhisper('typing', (event) => {
+        spanTyping.textContent = event.email + ' is typing...';
+    })*/
 
 // ./ for Presence channel
