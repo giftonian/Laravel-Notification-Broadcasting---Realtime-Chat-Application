@@ -15,6 +15,8 @@ const inputMessage = document.getElementById('input-message');
 const listMessgae = document.getElementById('list-messages');
 const spanTyping = document.getElementById('span-typing');
 
+const chatbox = document.getElementById('chat_box');
+
 
 
 form.addEventListener('submit', function (event) {
@@ -52,8 +54,15 @@ channel.here((users) => { // for Presence channel
         console.log(event);
         const message = event.message;
         const li = document.createElement('li');
-        li.textContent = event.user.name + ': ' + message;
+        li.innerHTML = '<b>'+event.user.name + ':</b> ' + message;
         listMessgae.append(li);
+        // working for new chat box of tailwind css
+        const div = document.createElement('div');
+        div.className = "flex justify-end mb-4"; //classList.add('MyClass');
+        div.innerHTML = '<div class="ml-2 py-3 px-4 bg-gray-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">'+
+        message+'</div><span><b>'+event.user.name+'</b></span>';
+        chatbox.appendChild(div);
+
     }) // . is necessary in case you are using Custom event name
 
     /*.listenForWhisper('typing', (event) => {

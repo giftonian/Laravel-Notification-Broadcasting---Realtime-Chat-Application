@@ -14,6 +14,6 @@ class ChatController extends Controller
      */
     public function chat(Request $request)
     {
-        return view('websocket');
+        return view('chat_ui_2');
     }
 }
