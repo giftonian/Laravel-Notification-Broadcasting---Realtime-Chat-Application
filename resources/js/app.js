@@ -11,10 +11,11 @@ Alpine.start();
 // For Presence channel //
 
 const form = document.getElementById('form');
-const inputMessage = document.getElementById('input-message');
+const inputMessage = document.getElementById('input-message');//
 //const listMessgae = document.getElementById('list-messages');
 //const spanTyping = document.getElementById('span-typing');
 
+const chatParent = document.getElementById('chat_box_parent');
 const chatbox = document.getElementById('chat_box');
 
 
@@ -87,8 +88,24 @@ channel.here((users) => { // for Presence channel
         message+'</div><span><b>&nbsp;&nbsp;'+msg_div_user+'</b></span>';
         
         chatbox.appendChild(div);
+        // chatParent.scroll({
+        // top: 0,
+        // behavior: "smooth"
+        // });
+        //console.log(chatParent.scrollTop);
+        const scrollVertLimit = chatParentHeight * 16; // rem to px conversion        
+        if (chatParent.scrollHeight > scrollVertLimit) { // Remember 1rem = 16px , So this condition w.r.t. chat parent div height
+            console.log(chatParent.scrollHeight);
+            //scrollUnit = chatParent.scrollHeight - 320
+            chatParent.scrollTop = chatParent.scrollHeight ;
+        }
+        
+        //console.log(chatParent.scroll);
 
     }) // . is necessary in case you are using Custom event name
+
+    
+    
 
     /*.listenForWhisper('typing', (event) => {
         spanTyping.textContent = event.email + ' is typing...';

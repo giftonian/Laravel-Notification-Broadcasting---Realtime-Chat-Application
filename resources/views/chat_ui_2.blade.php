@@ -49,7 +49,7 @@
                     <!-- Chatting -->
                     <div class="flex flex-row justify-between bg-white">
                     <!-- message -->                    
-                        <div class="w-full px-5 flex flex-col justify-between overflow-y-auto" style="height: rem">
+                        <div id="chat_box_parent" class="w-full px-5 flex flex-col scroll-smooth justify-between overflow-y-auto">
                             <div class="flex flex-col mt-5" id="chat_box">                            
                                 
                                 {{-- <div class="flex justify-start mb-4">
@@ -85,7 +85,9 @@
 
     </div>
     <script>
-        const currentUser = {!! auth()->user()->toJson() !!};        
+        const currentUser = {!! auth()->user()->toJson() !!};
+        const chatParentHeight = 20;
+        document.getElementById("chat_box_parent").style.height = chatParentHeight+"rem";       
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])  
 </x-app-layout>
