@@ -76,15 +76,21 @@ channel.here((users) => { // for Presence channel
         let msg_div_orient = "start";
         let msg_div_color  = "blue";
         let msg_div_user   = event.user.name;
+        let rounded1    = "br";
+        let rounded2    = "tr";
+        let rounded3    = "tl";
         const compareValue = currentUserEmail.localeCompare(senderEmail); // must be 0, in case same user
         if (compareValue === 0) { // same user
             msg_div_orient = "end"; 
             msg_div_color  = "gray";
-            msg_div_user   = "Me";       
+            msg_div_user   = "Me";  
+            rounded1       = "bl";
+            rounded2       = "tl"; 
+            rounded3       = "tr";    
         } 
 
         div.className = "flex justify-"+msg_div_orient+" mb-4";
-        div.innerHTML = '<div class="ml-2 py-3 px-4 bg-'+msg_div_color+'-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">'+
+        div.innerHTML = '<div class="ml-2 py-3 px-4 bg-'+msg_div_color+'-400 rounded-'+rounded1+'-3xl rounded-'+rounded2+'-3xl rounded-'+rounded3+'xl text-white">'+
         message+'</div><span><b>&nbsp;&nbsp;'+msg_div_user+'</b></span>';
         
         chatbox.appendChild(div);
