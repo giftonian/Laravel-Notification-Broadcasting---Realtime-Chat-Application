@@ -31,5 +31,6 @@
                 {{ $slot }}
             </main>
         </div>
+        {{ isset($script)?$script:'' }}
     </body>
 </html>

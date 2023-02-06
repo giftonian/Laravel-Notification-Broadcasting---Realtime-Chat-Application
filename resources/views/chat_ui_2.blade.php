@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8" >
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">                
                 <div class="p-0 text-gray-900">
-                    <div>
+                    {{-- <div>
                         <ul id="list-messages">
     
                         </ul>
@@ -25,15 +25,15 @@
                                     transition-all px-6 py-2 rounded-full">
                                     Add Sender
                                     </button>
-                            </div> --}}
+                            </div> 
                         </form>
-                    </div>
+                    </div> --}}
                     <!-- component -->
                     <!-- This is an example component -->
                     <div class="container mx-auto shadow-lg rounded-lg">
                         <!-- headaer -->
                     <div class="px-5 py-5 flex justify-between items-center bg-white border-b-2">
-                    <div class="font-semibold text-2xl">Group Chat</div>
+                    <div class="font-semibold text-2xl">Tech Club</div>
                     <div class="w-1/2">
                         {{-- <input type="text" name=""  id="" placeholder="search IRL"
                         class="rounded-2xl bg-gray-100 py-3 px-5 w-full"
@@ -51,8 +51,9 @@
                     <!-- message -->                    
                         <div class="w-full px-5 flex flex-col justify-between overflow-y-auto" style="height: rem">
                             <div class="flex flex-col mt-5" id="chat_box">                            
-                                <div class="flex justify-start mb-4">
-                                    {{-- <img src="https://source.unsplash.com/vpOeXr5wmR4/600x600"  class="object-cover h-8 w-8 rounded-full"  alt="" /> --}}
+                                
+                                {{-- <div class="flex justify-start mb-4">
+                                    <img src="https://source.unsplash.com/vpOeXr5wmR4/600x600"  class="object-cover h-8 w-8 rounded-full"  alt="" /> 
                                     <span><b>User 1</b></span>
                                     <div class="ml-2 py-3 px-4 bg-blue-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
@@ -63,14 +64,17 @@
                                     <div class="mr-2 py-3 px-4 bg-gray-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white" >
                                     Welcome to group everyone !
                                     </div>
-                                    {{-- <img src="https://source.unsplash.com/vpOeXr5wmR4/600x600" class="object-cover h-8 w-8 rounded-full" alt=""  /> --}}
+                                    <img src="https://source.unsplash.com/vpOeXr5wmR4/600x600" class="object-cover h-8 w-8 rounded-full" alt=""  /> 
                                     <span><b>Me</b></span>
-                                </div>                                             
+                                </div>  --}}
+
                             </div>                           
                         </div>                    
                     </div>
                     <div class="py-5 px-4">
-                        <input class="w-full bg-gray-300 py-5 px-3 rounded-xl" type="text" placeholder="type your message here..." />
+                        <form id="form"> 
+                        <input id="input-message" name="input-message" class="w-full bg-gray-300 py-5 px-3 rounded-xl" type="text" placeholder="type your message here..." />
+                        </form>
                         </div>
                     </div>
                     </div>
@@ -80,5 +84,8 @@
         </div>
 
     </div>
+    <script>
+        const currentUser = {!! auth()->user()->toJson() !!};        
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])  
 </x-app-layout>
