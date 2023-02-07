@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Broadcast;
 //     return (int) $user->id === (int) $id;
 // });
 
-// Presence
+// Presence - Authorizing users to listen at this channel
 Broadcast::channel('presence.chat.{id}', function($user, $id) {
     return $user; // to keep track of users connected to channel
 });

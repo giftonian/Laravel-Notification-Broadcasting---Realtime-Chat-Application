@@ -17,6 +17,7 @@ class ChatMessageEvent implements ShouldBroadcast
 
     private string $message;
     private $user;
+    // By default, all of the event's public properties will be included on the broadcast event
 
     /**
      * Create a new event instance.

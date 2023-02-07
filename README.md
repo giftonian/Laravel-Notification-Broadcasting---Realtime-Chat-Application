@@ -10,8 +10,11 @@ Type following commands:
 
 
 
-### **Learning Notifications and Broadcasting in Laravel**
+### **Learning Events, Notifications and Broadcasting in Laravel**
 
+- TL;DR : The core concepts behind broadcasting are simple: clients connect to named channels on the frontend, while your Laravel application broadcasts events to these channels on the backend. These events can contain any additional data you wish to make available to the frontend.
+- Laravel's events provide a simple observer pattern implementation, allowing you to subscribe and listen for various events that occur within your application. 
+- Example of slack notification, Your Event class is an event. Notification class is the listener of that event.
 - Polling (n requests/sec from client to server over http) is a slow process. Because http contains lots of messages / headers etc.
 - WebSockets (WS) is the solution, bcz its Persistent connection (established once only) nature. 
 - PubSub Pattern for WS => Only server sends data to clients, e.g., financial apps updates, video streaming, cctv.
