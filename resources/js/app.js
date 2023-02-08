@@ -18,6 +18,7 @@ const inputMessage = document.getElementById('input-message');//
 const chatParent = document.getElementById('chat_box_parent');
 const chatbox = document.getElementById('chat_box');
 let totalUsersBox = document.getElementById('total_users');
+let typingBox = document.getElementById('typing');
 
 
 
@@ -33,13 +34,24 @@ form.addEventListener('submit', function (event) {
         message:userInput,
         sid:sid
     })
-    inputMessage.value = "";
+    inputMessage.value = '';
+    channel.whisper('stop-typing'); // No payload required for this
 })
-
 
 
 const channel = window.Echo.join('presence.chat.1'); // for Presence channel
 let onlineUsers = [];
+
+inputMessage.addEventListener('input', function(event) {
+    //console.log('test size = '+inputMessage.value.length);
+    if (inputMessage.value.length === 0) {
+        channel.whisper('stop-typing'); // No payload required for this
+    } else {
+        channel.whisper('typing', { // 'typing' is the event name and the 2nd argument is payload
+            username: currentUser.name        
+        })    
+    }
+})
 
 
 
@@ -59,11 +71,7 @@ function userInitial(username) {
     const names = username.split(' ');
     return names.map((name) => name[0]).join("").toUpperCase();
 }
-/*inputMessage.addEventListener('input', function (event) {    
-    channel.whisper('typing', {
-        email: user.email
-    })
-});*/
+
 
 function renderScroll() {
     // chatParent.scroll({
@@ -153,8 +161,15 @@ channel.here((users) => { // for Presence channel
     
     
 
-    /*.listenForWhisper('typing', (event) => {
-        spanTyping.textContent = event.email + ' is typing...';
-    })*/
+    .listenForWhisper('typing', (event) => { // Allow clients to communicate with each other directly without Laravel wev server
+        //spanTyping.textContent = event.email + ' is typing...';
+        //console.log(user.username+' is typing...')
+        const typeText = '<small>'+event.username+' is typing...</small>';
+        typingBox.innerHTML = typeText;
+    })
+
+    .listenForWhisper('stop-typing', (event) => {                 
+        typingBox.innerHTML = '';
+    })
 
 // ./ for Presence channel

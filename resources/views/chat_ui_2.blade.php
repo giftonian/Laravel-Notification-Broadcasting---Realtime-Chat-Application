@@ -79,6 +79,7 @@
                         </div>                    
                     </div>
                     <div class="py-5 px-4">
+                        <div id="typing"></div>
                         <form id="form"> 
                         <input id="input-message" name="input-message" class="w-full bg-gray-300 py-5 px-3 rounded-xl" type="text" placeholder="type your message here..." />
                         </form>
