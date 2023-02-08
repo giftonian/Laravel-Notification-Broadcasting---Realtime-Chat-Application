@@ -48,7 +48,17 @@
                     <div class="flex flex-row justify-between bg-white">
                     <!-- message -->                    
                         <div id="chat_box_parent" class="w-full px-5 flex flex-col scroll-smooth justify-between overflow-y-auto">
-                            <div class="flex flex-col mt-5" id="chat_box">                            
+                            <div class="flex flex-col mt-5" id="chat_box">         
+                                {{-- <div class="join-room"><span><b>&nbsp;&nbsp;ALI</b> <i>has joined the conversation.</i></span></div> --}}
+                                
+
+                                {{-- <div class="single-msg">
+                                <span><b>&nbsp;&nbsp;Usman</b></span>
+                                <div class="flex justify-start mb-4">
+                                    <div class="ml-2 py-3 px-4 bg-blue-400 rounded-br-3xl rounded-tr-3xl 
+                                    rounded-tlxl text-white">message</div>
+                                </div>
+                                </div> --}}
                                 
                                 {{-- <div class="flex justify-start mb-4">
                                     <img src="https://source.unsplash.com/vpOeXr5wmR4/600x600"  class="object-cover h-8 w-8 rounded-full"  alt="" /> 

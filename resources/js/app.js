@@ -65,7 +65,21 @@ function userInitial(username) {
     })
 });*/
 
-
+function renderScroll() {
+    // chatParent.scroll({
+        // top: 0,
+        // behavior: "smooth"
+        // });
+        //console.log(chatParent.scrollTop);
+        const scrollVertLimit = chatParentHeight * 16; // rem to px conversion        
+        if (chatParent.scrollHeight > scrollVertLimit) { // Remember 1rem = 16px , So this condition w.r.t. chat parent div height
+            console.log(chatParent.scrollHeight);
+            //scrollUnit = chatParent.scrollHeight - 320
+            chatParent.scrollTop = chatParent.scrollHeight ;
+        }
+        
+        //console.log(chatParent.scroll);
+}
 
 channel.here((users) => { // for Presence channel
     console.log({users})
@@ -78,13 +92,24 @@ channel.here((users) => { // for Presence channel
         console.log({user}, ' joined')
         //alert("Welcome " + user.name)
         onlineUsers.push(user);
+        // <div class="join-room"><span><b>&nbsp;&nbsp;ALI</b> <i>has joined the conversation.</i></span></div>
+        const joiningDiv = document.createElement('div');
+        joiningDiv.className = "join-room";
+        joiningDiv.innerHTML = '<span><b>&nbsp;&nbsp;'+user.name+'</b> <i>has joined the conversation.</i></span>';
+        chatbox.appendChild(joiningDiv);       
         renderUsers();
+        renderScroll();
     })
 
     .leaving((user) => {
         console.log({user}, 'leaving')
         onlineUsers = onlineUsers.filter((onlineUsers) => onlineUsers.id !== user.id);
+        const leavingDiv = document.createElement('div');
+        leavingDiv.className = "leave-room";
+        leavingDiv.innerHTML = '<span><b>&nbsp;&nbsp;'+user.name+'</b> <i>has left the conversation.</i></span>';
+        chatbox.appendChild(leavingDiv);
         renderUsers();
+        renderScroll();
     })
 
     .listen('.chat-message', (event) => {
@@ -121,19 +146,7 @@ channel.here((users) => { // for Presence channel
         message+'</div><span><b>&nbsp;&nbsp;'+msg_div_user+'</b></span>';
         
         chatbox.appendChild(div);
-        // chatParent.scroll({
-        // top: 0,
-        // behavior: "smooth"
-        // });
-        //console.log(chatParent.scrollTop);
-        const scrollVertLimit = chatParentHeight * 16; // rem to px conversion        
-        if (chatParent.scrollHeight > scrollVertLimit) { // Remember 1rem = 16px , So this condition w.r.t. chat parent div height
-            console.log(chatParent.scrollHeight);
-            //scrollUnit = chatParent.scrollHeight - 320
-            chatParent.scrollTop = chatParent.scrollHeight ;
-        }
-        
-        //console.log(chatParent.scroll);
+        renderScroll();        
 
     }) // . is necessary in case you are using Custom event name
 
