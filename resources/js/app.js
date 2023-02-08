@@ -17,6 +17,8 @@ const inputMessage = document.getElementById('input-message');//
 
 const chatParent = document.getElementById('chat_box_parent');
 const chatbox = document.getElementById('chat_box');
+let totalUsersBox = document.getElementById('total_users');
+
 
 
 
@@ -35,9 +37,28 @@ form.addEventListener('submit', function (event) {
 })
 
 
+
 const channel = window.Echo.join('presence.chat.1'); // for Presence channel
+let onlineUsers = [];
 
 
+
+function renderUsers() {
+    let total_users = onlineUsers.length;
+    console.log("# of Online Users is = "+total_users);
+    totalUsersBox.textContent = total_users;
+    // update ui
+    let initials = '';
+    onlineUsers.forEach((user) => {
+        initials = userInitial(user.name);
+    }
+    ) 
+}
+
+function userInitial(username) {
+    const names = username.split(' ');
+    return names.map((name) => name[0]).join("").toUpperCase();
+}
 /*inputMessage.addEventListener('input', function (event) {    
     channel.whisper('typing', {
         email: user.email
@@ -50,14 +71,20 @@ channel.here((users) => { // for Presence channel
     console.log({users})
     console.log('subscribed!!')
     //console.log("CURRENT User is  " + currentUser.email);
+    onlineUsers = [...users]; // ... is Spread Syntax or Spread Operator. https://oprearocks.medium.com/what-do-the-three-dots-mean-in-javascript-bc5749439c9a
+    renderUsers();
 })
     .joining( (user) => { // callback method when a user joins this channel
         console.log({user}, ' joined')
         //alert("Welcome " + user.name)
+        onlineUsers.push(user);
+        renderUsers();
     })
 
     .leaving((user) => {
         console.log({user}, 'leaving')
+        onlineUsers = onlineUsers.filter((onlineUsers) => onlineUsers.id !== user.id);
+        renderUsers();
     })
 
     .listen('.chat-message', (event) => {

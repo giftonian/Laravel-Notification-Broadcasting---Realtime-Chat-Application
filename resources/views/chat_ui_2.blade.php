@@ -39,10 +39,8 @@
                         class="rounded-2xl bg-gray-100 py-3 px-5 w-full"
                         /> --}}
                     </div>
-                    <div
-                        class="h-12 w-12 p-2 bg-yellow-500 rounded-full text-white font-semibold flex items-center justify-center"
-                    >
-                        WA
+                    <div id="total_users" class="h-12 w-12 p-2 bg-yellow-500 rounded-full text-white font-semibold flex items-center justify-center">
+                        0
                     </div>
                     </div>
                     <!-- end header -->
