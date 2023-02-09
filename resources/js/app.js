@@ -23,7 +23,7 @@ let typingBox = document.getElementById('typing');
 
 
 
-
+console.log('channel = '+channelId)
 
 form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -32,14 +32,16 @@ form.addEventListener('submit', function (event) {
     //alert(sid)
     axios.post('/chat-message', { // axios is a promised-based HTTP client
         message:userInput,
-        sid:sid
+        sid:sid,
+        channel_id:channelId
     })
     inputMessage.value = '';
     channel.whisper('stop-typing'); // No payload required for this
+    
 })
 
 
-const channel = window.Echo.join('presence.chat.1'); // for Presence channel
+const channel = window.Echo.join('presence.chat.'+channelId); // for Presence channel
 let onlineUsers = [];
 
 inputMessage.addEventListener('input', function(event) {

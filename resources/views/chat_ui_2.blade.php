@@ -33,7 +33,7 @@
                     <div class="container mx-auto shadow-lg rounded-lg">
                         <!-- headaer -->
                     <div class="px-5 py-5 flex justify-between items-center bg-white border-b-2">
-                    <div class="font-semibold text-2xl">Tech Club</div>
+                    <div class="font-semibold text-2xl">Tech Club - <b>{{ $data['channel_name']}}</b></div>
                     <div class="w-1/2">
                         {{-- <input type="text" name=""  id="" placeholder="search IRL"
                         class="rounded-2xl bg-gray-100 py-3 px-5 w-full"
@@ -95,7 +95,10 @@
     <script>
         const currentUser = {!! auth()->user()->toJson() !!};
         const chatParentHeight = 20;
-        document.getElementById("chat_box_parent").style.height = chatParentHeight+"rem";       
+        document.getElementById("chat_box_parent").style.height = chatParentHeight+"rem";
+        
+        const channelId = {!! $data['channel_id'] !!}
+        
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])  
 </x-app-layout>
