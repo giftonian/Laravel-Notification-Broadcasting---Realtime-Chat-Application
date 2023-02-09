@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
 
 Route::post('/chat-message' , function (\Illuminate\Http\Request $request) {
     event(new \App\Events\ChatMessageEvent($request->message, auth()->user())); // passing , auth()->user() to get user name in Private Channel communication
+    //broadcast(new \App\Events\ChatMessageEvent($request->message, auth()->user()));
     return null;
  })->middleware(['auth', 'verified']); // attaching auth middlware in case of Private channel communication, otherwise non-logged in user can send msgs
 

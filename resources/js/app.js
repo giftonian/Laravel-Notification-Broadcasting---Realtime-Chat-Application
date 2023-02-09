@@ -120,7 +120,7 @@ channel.here((users) => { // for Presence channel
         renderScroll();
     })
 
-    .listen('.chat-message', (event) => {
+    .listen('.chat-message', (event) => { // Remember! chat-message is the event name, not a channel name
         // console.log("I am "+currentUser.email);
         // console.log("sender is "+event.user.email);
         console.log(event);
