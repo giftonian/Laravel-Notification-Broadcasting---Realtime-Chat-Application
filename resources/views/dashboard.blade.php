@@ -9,7 +9,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+                    {{ __("Click any channel to Join!") }}
+                    <ul>
+                        @foreach($channels as $channel)
+                        <li>
+                            <span>&#8594;</span> <a href="{{route('chatroom', ['channel_id' => $channel->id])}}"><b>{{$channel->name}}</b></a>
+                        </li>                                          
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>

@@ -7,6 +7,19 @@ use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
+
+    /**
+     * Display the index page
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        $channels = Channel::get();
+        return view('dashboard', compact('channels'));
+    }
+
     /**
      * Display the user's profile form.
      *
