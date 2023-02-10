@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Channel;
+use App\Models\Message;
 use Illuminate\Http\Request;
+use App\Events\ChatMessageEvent;
 
 class ChatController extends Controller
 {
@@ -50,5 +52,38 @@ class ChatController extends Controller
         $data['channel_id'] = $channel->id;
         $data['channel_name'] = $channel->name;
         return view('chat_ui_2', compact('data'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeMessage(Request $request)
+    {
+        $notAllowed = false;
+        $request->validate([
+            'message'          =>  'required',
+            'channel_id'        => 'required'           
+        ]);
+        $user_id = auth()->user()->id; 
+
+        $message = new Message();
+
+        $message->user_id = $user_id;
+        $message->channel_id = $request->channel_id;
+        $message->message = $request->message;
+
+        $message->save();
+        event(new ChatMessageEvent($request->channel_id, $request->message, auth()->user()));
+
+        if ($notAllowed) {
+            return $this->jsonResponse([
+                'message' => 'Not Acceptable',
+            ], 406, false);
+        } else {
+            return null;
+        }
     }
 }
