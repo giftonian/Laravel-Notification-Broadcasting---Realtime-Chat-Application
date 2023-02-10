@@ -49,32 +49,40 @@
                     <!-- message -->                    
                         <div id="chat_box_parent" class="w-full px-5 flex flex-col scroll-smooth justify-between overflow-y-auto">
                             <div class="flex flex-col mt-5" id="chat_box">         
-                                {{-- <div class="join-room"><span><b>&nbsp;&nbsp;ALI</b> <i>has joined the conversation.</i></span></div> --}}
-                                
+                                {{-- <div class="join-room"><span><b>&nbsp;&nbsp;ALI</b> <i>has joined the conversation.</i></span></div> --}}                               
 
-                                {{-- <div class="single-msg">
-                                <span><b>&nbsp;&nbsp;Usman</b></span>
-                                <div class="flex justify-start mb-4">
-                                    <div class="ml-2 py-3 px-4 bg-blue-400 rounded-br-3xl rounded-tr-3xl 
-                                    rounded-tlxl text-white">message</div>
-                                </div>
-                                </div> --}}
-                                
+
+
+                                @foreach($messages as $index => $msg)
+
+                                    @if (auth()->user()->id === $msg->user->id)
+                                        <div class="flex justify-end mb-4">                                     
+                                            <div class="ml-2 py-3 px-4 bg-gray-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
+                                                {{ $msg->message}}
+                                            </div>                                                                                                       
+                                            <span><b>&nbsp;&nbsp;Me</b></span>
+                                        </div>                                        
+                                    @else
+                                        <div class="flex justify-start mb-4">
+                                            <div class="ml-2 py-3 px-4 bg-blue-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
+                                                {{ $msg->message}}
+                                            </div>
+                                            <span><b>&nbsp;&nbsp;{{ $msg->user->name }}</b></span>
+                                        </div>
+                                    @endif
+
+                                @endforeach
+                                                               
                                 {{-- <div class="flex justify-start mb-4">
-                                    <img src="https://source.unsplash.com/vpOeXr5wmR4/600x600"  class="object-cover h-8 w-8 rounded-full"  alt="" /> 
-                                    <span><b>User 1</b></span>
-                                    <div class="ml-2 py-3 px-4 bg-blue-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-                                    at praesentium, 
-                                    </div>
-                                </div>
-                                <div class="flex justify-end mb-4">
-                                    <div class="mr-2 py-3 px-4 bg-gray-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white" >
-                                    Welcome to group everyone !
-                                    </div>
-                                    <img src="https://source.unsplash.com/vpOeXr5wmR4/600x600" class="object-cover h-8 w-8 rounded-full" alt=""  /> 
-                                    <span><b>Me</b></span>
-                                </div>  --}}
+                                    <div class="ml-2 py-3 px-4 bg-blue-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">His msg</div>
+                                    <span><b>&nbsp;&nbsp;Usman</b></span>
+                                </div>                                                                
+                               
+                                <div class="flex justify-end mb-4">                                     
+                                    <div class="ml-2 py-3 px-4 bg-gray-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">sdf</div>                                                                                                       
+                                    <span><b>&nbsp;&nbsp;Me</b></span>
+                                </div>    --}}
+                                
                             </div>                           
                         </div>                    
                     </div>
@@ -97,7 +105,7 @@
         const chatParentHeight = 20;
         document.getElementById("chat_box_parent").style.height = chatParentHeight+"rem";
         
-        const channelId = {!! $data['channel_id'] !!}
+        const channelId = {!! $data['channel_id'] !!}        
         
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])  

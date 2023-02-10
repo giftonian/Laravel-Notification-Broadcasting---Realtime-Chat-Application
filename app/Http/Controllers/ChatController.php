@@ -49,9 +49,22 @@ class ChatController extends Controller
         //     $data['total_clicks'] += $row->click_count;            
         // }
         $channel   = Channel::find($channel_id);
+        $messages  = $channel->messages()
+        ->orderBy('id', 'ASC')
+        ->get();
+        
+        //dd($messages);
+        // foreach ($messages as $index => $msg) {
+        //     echo '<pre>';
+        //     print_r($msg->message);
+        //     print_r($msg->user->name);
+        //     print_r($msg->user->id);
+        // }
+        // exit;
+
         $data['channel_id'] = $channel->id;
         $data['channel_name'] = $channel->name;
-        return view('chat_ui_2', compact('data'));
+        return view('chat_ui_2', compact(['data', 'messages']));
     }
 
     /**
@@ -64,7 +77,7 @@ class ChatController extends Controller
     {
         $notAllowed = false;
         $request->validate([
-            'message'          =>  'required',
+            'message'          =>  'required|min:1|max:1000',
             'channel_id'        => 'required'           
         ]);
         $user_id = auth()->user()->id; 
@@ -75,8 +88,18 @@ class ChatController extends Controller
         $message->channel_id = $request->channel_id;
         $message->message = $request->message;
 
-        $message->save();
-        event(new ChatMessageEvent($request->channel_id, $request->message, auth()->user()));
+        $saved = $message->save();
+        if ($saved) {
+            event(new ChatMessageEvent($request->channel_id, $request->message, auth()->user()));
+        } else {
+            $notAllowed = true;
+        }
+        
+        // return $this->jsonResponse([
+        //     'new_message_is_added' => true,
+        //     'message' => 'Your new message is successfully created.',
+        //     'message_info' => $message,
+        // ]);
 
         if ($notAllowed) {
             return $this->jsonResponse([
