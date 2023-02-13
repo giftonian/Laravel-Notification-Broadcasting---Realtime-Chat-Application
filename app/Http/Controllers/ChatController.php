@@ -6,6 +6,7 @@ use App\Models\Channel;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Events\ChatMessageEvent;
+use Carbon\Carbon;
 
 class ChatController extends Controller
 {
@@ -35,23 +36,14 @@ class ChatController extends Controller
 
     public function chatRoom(Request $request, $channel_id)
     {
-        // $page_num = isset($request['page'])?$request['page']:1;
-        // $data = [];
-        // $data['page_num'] = $page_num;
-        // $data['rec_counter'] = (config('constants.PAGE_SIZE')*$page_num)-(config('constants.PAGE_SIZE')) + 1;  
-        
-        // $data['campaign']       = campaignDetailById($campaign_sent_id);
-        // $data['stats']          = campaignStatsById($campaign_sent_id);
-        // $data['total_receivers'] = sizeof($data['stats']); 
-        // $data['total_clicks']   = 0;
-        
-        // foreach ($data['stats'] as $row) {
-        //     $data['total_clicks'] += $row->click_count;            
-        // }
+        $date = Carbon::now()->subDays(7);        
         $channel   = Channel::find($channel_id);
         $messages  = $channel->messages()
         ->orderBy('id', 'ASC')
+        ->where('created_at', '>=', $date)
         ->get();
+        //->limit(50)
+        //whereBetween('reservation_from', [$from, $to])
         
         //dd($messages);
         // foreach ($messages as $index => $msg) {

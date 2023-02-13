@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatController;
 use GuzzleHttp\Psr7\Request;
+use App\Http\Controllers\ChannelController;
 //use Illuminate\Http\Request;
 
 /*
@@ -31,7 +32,9 @@ Route::middleware('auth')->group(function () {
 
     //Route::get('/chatroom', [ChatController::class, 'chat'])->name('chatroom');
     Route::get('/chatroom/{channel_id}', [ChatController::class, 'chatRoom'])->name('chatroom');   
-    Route::post('/chat-message', [ChatController::class, 'storeMessage'])->name('chat-message'); 
+    Route::post('/chat-message', [ChatController::class, 'storeMessage'])->name('chat-message');
+    
+    Route::resource('channels', ChannelController::class);
 });
 
 
