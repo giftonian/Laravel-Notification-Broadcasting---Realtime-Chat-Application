@@ -42,6 +42,7 @@ class ChannelController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $request->validate([
             'name'          =>  'required',
             'description'           =>  'required',            
@@ -122,7 +123,7 @@ class ChannelController extends Controller
      */
     public function destroy(Channel $channel)
     {
-       // $channel->delete();
+        //$channel->delete();
         return redirect()->route('channels.index')->with('success', 'Record deleted successfully');
     }
 }
