@@ -8,6 +8,16 @@
         <div class="p-2 bg-green-200 border-b border-green-400 rounded-md">
         {{ session()->get('success') }}
         </div>
+    @elseif($errors->any())
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+            <ul>
+            @foreach($errors->all() as $error)
+    
+                <li>{{ $error }}</li>
+    
+            @endforeach
+            </ul>
+        </div>
     @endif
       <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

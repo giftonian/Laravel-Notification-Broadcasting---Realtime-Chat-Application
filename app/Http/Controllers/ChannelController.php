@@ -107,6 +107,11 @@ class ChannelController extends Controller
             'description'           =>  'required',           
         ]);
 
+        $user_id = auth()->user()->id;
+        if ($channel->user_id !== $user_id) {
+            return back()->withErrors('You are not allowed to perform this action!');
+        }
+
         $channel->name = $request->name;
         $channel->description = $request->description;        
 
@@ -123,6 +128,10 @@ class ChannelController extends Controller
      */
     public function destroy(Channel $channel)
     {
+        $user_id = auth()->user()->id;
+        if ($channel->user_id !== $user_id) {
+            return back()->withErrors('You are not allowed to perform this action!');
+        }
         //$channel->delete();
         return redirect()->route('channels.index')->with('success', 'Record deleted successfully');
     }
