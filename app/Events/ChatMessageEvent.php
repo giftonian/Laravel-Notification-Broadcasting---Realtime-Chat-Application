@@ -17,6 +17,7 @@ class ChatMessageEvent implements ShouldBroadcast
 
     private string $message;
     private $user;
+    // By default, all of the event's public properties will be included on the broadcast event
 
     /**
      * Create a new event instance.
@@ -36,15 +37,12 @@ class ChatMessageEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('presence.chat.1');
-        //return new PrivateChannel('private.chat.1');
-        //return new Channel('public.chat.1'); // this is Public channel, requires no authentication
-        // above line commented to test Private channel working
+        return new PresenceChannel('presence.chat.1');       
     }
 
     public function broadcastAs() // for our own Event name, instead of full ClassName
     {
-        return 'chat-message';
+        return 'chat-message'; // clients (js code) will listen at this
     }
 
     public function broadcastWith() // generating an event with a payload/data

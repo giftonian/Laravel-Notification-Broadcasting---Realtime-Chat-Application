@@ -39,7 +39,7 @@ class UserRegisterNotification extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail', 'slack'];
+        return [/*'mail',*/ 'slack']; // commenting email due to internet issue
     }
 
     /**

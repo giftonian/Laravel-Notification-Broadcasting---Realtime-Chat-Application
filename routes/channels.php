@@ -13,19 +13,11 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
-});
+// Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
+//     return (int) $user->id === (int) $id;
+// });
 
-// Private
-/*
-Broadcast::channel('private.chat.{id}', function($user, $id) {
-    return true; // true => Accepting the handshake
-});
-*/
-//
-
-// Presence
+// Presence - Authorizing users to listen at this channel
 Broadcast::channel('presence.chat.{id}', function($user, $id) {
     return $user; // to keep track of users connected to channel
 });
