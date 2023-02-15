@@ -1,4 +1,11 @@
-# Laravel Notifications and Broadcasting Example
+# Laravel Notifications & Broadcasting with complete Realtime Chat Application
+## **Built with Laravel WebSockets**
+
+## Intallation
+- Clone this repository
+- composer install
+- Create empty database and set credentials in .env
+- php artisan migrate
 
 ## Running Servers
 
@@ -7,8 +14,6 @@ Type following commands:
 - php artisan serve
 - php artisan websockets:serve
 - npm run dev
-
-
 
 ### **Learning Events, Notifications and Broadcasting in Laravel**
 
@@ -43,7 +48,9 @@ Type following commands:
 - routes\channels.php  (return $user instead of true)
 - resources\js\app.js
 
-
+## Author
+- *Waqas Tariq Dar*
+- *waqastariqdar@gmail.com*
 
 ## Prepared For
 
