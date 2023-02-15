@@ -29,7 +29,7 @@ Type following commands:
 - There are three channels for laravel broadcasting i.e., Public, Private and Presence
 - Each client should subscribe to a channel to send/receive a message to/from particular channel.
 - Public => no authentication
-- Private => Auth , but users don't know each other
+- Private => Auth, but users don't know each other
 - Presence => Auth, users know each other
 - By default, a laravel user can't join a Private channel without being Logged in. Laravel checks this with default Authentication guard (web) defined in config\auth.php
 - The difference between Presence channel and Private channel is that Presence channel know all the users who are currently in the channel.
