@@ -23,7 +23,7 @@ let typingBox = document.getElementById('typing');
 
 
 
-
+console.log('channel = '+channelId)
 
 form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -32,14 +32,16 @@ form.addEventListener('submit', function (event) {
     //alert(sid)
     axios.post('/chat-message', { // axios is a promised-based HTTP client
         message:userInput,
-        sid:sid
+        sid:sid,
+        channel_id:channelId
     })
     inputMessage.value = '';
     channel.whisper('stop-typing'); // No payload required for this
+    
 })
 
 
-const channel = window.Echo.join('presence.chat.1'); // for Presence channel
+const channel = window.Echo.join('presence.chat.'+channelId); // for Presence channel
 let onlineUsers = [];
 
 inputMessage.addEventListener('input', function(event) {
@@ -88,6 +90,7 @@ function renderScroll() {
         
         //console.log(chatParent.scroll);
 }
+renderScroll();
 
 channel.here((users) => { // for Presence channel
     console.log({users})
@@ -150,7 +153,7 @@ channel.here((users) => { // for Presence channel
         } 
 
         div.className = "flex justify-"+msg_div_orient+" mb-4";
-        div.innerHTML = '<div class="ml-2 py-3 px-4 bg-'+msg_div_color+'-400 rounded-'+rounded1+'-3xl rounded-'+rounded2+'-3xl rounded-'+rounded3+'xl text-white">'+
+        div.innerHTML = '<div class="ml-2 py-3 px-4 bg-'+msg_div_color+'-400 rounded-'+rounded1+'-3xl rounded-'+rounded2+'-3xl rounded-'+rounded3+'-xl text-white">'+
         message+'</div><span><b>&nbsp;&nbsp;'+msg_div_user+'</b></span>';
         
         chatbox.appendChild(div);

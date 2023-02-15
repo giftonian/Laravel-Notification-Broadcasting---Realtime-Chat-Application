@@ -1,4 +1,11 @@
-# Laravel Notifications and Broadcasting Example
+# Laravel Notifications & Broadcasting with complete Realtime Chat Application
+## **Built with Laravel WebSockets**
+
+## Intallation
+- Clone this repository
+- composer install
+- Create empty database and set credentials in .env
+- php artisan migrate
 
 ## Running Servers
 
@@ -7,8 +14,6 @@ Type following commands:
 - php artisan serve
 - php artisan websockets:serve
 - npm run dev
-
-
 
 ### **Learning Events, Notifications and Broadcasting in Laravel**
 
@@ -24,7 +29,7 @@ Type following commands:
 - There are three channels for laravel broadcasting i.e., Public, Private and Presence
 - Each client should subscribe to a channel to send/receive a message to/from particular channel.
 - Public => no authentication
-- Private => Auth , but users don't know each other
+- Private => Auth, but users don't know each other
 - Presence => Auth, users know each other
 - By default, a laravel user can't join a Private channel without being Logged in. Laravel checks this with default Authentication guard (web) defined in config\auth.php
 - The difference between Presence channel and Private channel is that Presence channel know all the users who are currently in the channel.
@@ -43,7 +48,9 @@ Type following commands:
 - routes\channels.php  (return $user instead of true)
 - resources\js\app.js
 
-
+## Author
+- *Waqas Tariq Dar*
+- *waqastariqdar@gmail.com*
 
 ## Prepared For
 

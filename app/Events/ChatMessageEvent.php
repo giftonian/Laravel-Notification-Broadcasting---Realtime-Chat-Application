@@ -17,6 +17,7 @@ class ChatMessageEvent implements ShouldBroadcast
 
     private string $message;
     private $user;
+    private $channelId;
     // By default, all of the event's public properties will be included on the broadcast event
 
     /**
@@ -24,10 +25,12 @@ class ChatMessageEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(string $message, User $user) // passing User $user for Private channel communication
+    public function __construct(int $channelId, string $message, User $user) // passing User $user for Private channel communication
     {
-       $this->message = $message;
-       $this->user = $user;
+
+        $this->channelId = $channelId;
+        $this->message = $message;
+        $this->user = $user;       
     }
 
     /**
@@ -37,7 +40,7 @@ class ChatMessageEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('presence.chat.1');       
+        return new PresenceChannel('presence.chat.'.$this->channelId);       
     }
 
     public function broadcastAs() // for our own Event name, instead of full ClassName
